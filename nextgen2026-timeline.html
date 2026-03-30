@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXTGEN 2026 — Innovation Timeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #060B08;
+  --bg2: #0A1209;
+  --card: rgba(255,255,255,0.03);
+  --card-hover: rgba(255,255,255,0.055);
+  --border: rgba(255,255,255,0.07);
+  --border-green: rgba(26,219,94,0.28);
+  --green: #1ADB5E;
+  --green-glow: rgba(26,219,94,0.12);
+  --text: #FFFFFF;
+  --text-muted: rgba(255,255,255,0.52);
+  --text-dim: rgba(255,255,255,0.28);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 52px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(6,11,8,0.88);
+  backdrop-filter: blur(24px);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 800; letter-spacing: -0.01em; color: var(--text);
+}
+.nav-logo span { color: var(--green); }
+.nav-links {
+  display: flex; gap: 36px;
+  font-size: 12px; color: var(--text-muted);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.nav-links a { color: inherit; text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--green); }
+.nav-badge {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 16px; border: 1px solid var(--border-green); border-radius: 50px;
+  font-size: 11px; font-family: 'Space Mono', monospace;
+  color: var(--green); letter-spacing: 0.07em;
+}
+.nav-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 120px 48px 80px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -52%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(26,219,94,0.07) 0%, transparent 68%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 18px; border: 1px solid var(--border-green); border-radius: 50px;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  color: var(--green); letter-spacing: 0.1em; margin-bottom: 36px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(56px, 9vw, 108px);
+  font-weight: 800; letter-spacing: -0.035em; line-height: 0.93;
+  margin-bottom: 28px;
+}
+.hero-title .accent { color: var(--green); }
+.hero-title .dim { color: var(--text-muted); }
+.hero-sub {
+  font-size: 16px; color: var(--text-muted); max-width: 500px;
+  line-height: 1.75; margin-bottom: 56px; font-weight: 300;
+}
+.hero-stats { display: flex; gap: 48px; align-items: center; }
+.stat-num {
+  font-family: 'Syne', sans-serif; font-size: 40px;
+  font-weight: 800; color: var(--green); line-height: 1; margin-bottom: 4px;
+}
+.stat-lbl {
+  font-size: 10px; color: var(--text-dim); letter-spacing: 0.14em;
+  text-transform: uppercase; font-family: 'Space Mono', monospace;
+}
+.sdiv { width: 1px; height: 44px; background: var(--border); }
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  font-size: 9px; color: var(--text-dim); letter-spacing: 0.18em;
+  text-transform: uppercase; font-family: 'Space Mono', monospace;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.scroll-line {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, var(--green), transparent);
+  animation: slideDown 2s ease-in-out infinite;
+}
+
+/* TIMELINE SECTION */
+.tl-section { padding: 80px 0 120px; }
+.tl-header { text-align: center; padding: 0 48px 88px; }
+.sec-label {
+  display: inline-block; font-family: 'Space Mono', monospace;
+  font-size: 10px; color: var(--green); letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 18px;
+}
+.sec-label::before { content: '● '; font-size: 8px; }
+.sec-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(38px, 5.5vw, 62px);
+  font-weight: 800; letter-spacing: -0.028em; line-height: 1.04;
+  margin-bottom: 18px;
+}
+.sec-title .dim { color: var(--text-muted); }
+.sec-desc {
+  font-size: 15px; color: var(--text-muted);
+  max-width: 460px; margin: 0 auto; font-weight: 300;
+}
+
+/* SPINE */
+.spine-wrap {
+  position: relative; max-width: 1140px; margin: 0 auto; padding: 0 48px;
+}
+.spine-wrap::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 1px; transform: translateX(-50%);
+  background: linear-gradient(to bottom, transparent 0%, var(--green) 4%, var(--green) 96%, transparent 100%);
+  box-shadow: 0 0 18px rgba(26,219,94,0.5), 0 0 40px rgba(26,219,94,0.2);
+}
+
+/* PHASE BLOCK */
+.phase {
+  position: relative; margin-bottom: 96px;
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.phase.visible { opacity: 1; transform: translateY(0); }
+
+.phase-node-wrap {
+  position: absolute; left: 50%; top: 16px;
+  transform: translateX(-50%); z-index: 10;
+}
+.phase-node {
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 1px solid var(--green);
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace; font-size: 13px; color: var(--green);
+  box-shadow: 0 0 28px var(--green-glow), 0 0 60px rgba(26,219,94,0.08), inset 0 0 20px var(--green-glow);
+  position: relative;
+}
+.phase-node::before {
+  content: ''; position: absolute; inset: -9px; border-radius: 50%;
+  border: 1px solid rgba(26,219,94,0.18);
+}
+.phase-node::after {
+  content: ''; position: absolute; inset: -18px; border-radius: 50%;
+  border: 1px solid rgba(26,219,94,0.07);
+}
+
+.phase-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding-top: 16px;
+}
+.phase-left { padding: 72px 72px 0 0; }
+.phase-right { padding: 72px 0 0 72px; }
+
+/* flip: info goes right, events go left */
+.phase.flip .phase-left { order: 2; padding: 72px 0 0 72px; text-align: right; }
+.phase.flip .phase-right { order: 1; padding: 72px 72px 0 0; }
+
+.phase-tag {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--green); margin-bottom: 14px; opacity: 0.75;
+}
+.phase-name {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800; letter-spacing: -0.022em; line-height: 1.08;
+  margin-bottom: 14px;
+}
+.phase-range {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  color: var(--text-dim); margin-bottom: 18px; letter-spacing: 0.06em;
+}
+.phase-desc { font-size: 13px; color: var(--text-muted); line-height: 1.75; font-weight: 300; }
+
+/* EVENTS */
+.events { display: flex; flex-direction: column; gap: 10px; }
+.ecard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 22px;
+  transition: background 0.2s, border-color 0.2s;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s, border-color 0.2s;
+}
+.ecard.visible { opacity: 1; transform: translateY(0); }
+.ecard:hover { background: var(--card-hover); border-color: var(--border-green); }
+.ecard-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.edate { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--green); letter-spacing: 0.08em; }
+.etag { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.etitle { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
+.ebullets { list-style: none; margin-top: 8px; }
+.ebullets li {
+  font-size: 11.5px; color: var(--text-muted); padding: 2px 0 2px 16px;
+  position: relative; line-height: 1.55; font-weight: 300;
+}
+.ebullets li::before {
+  content: '—'; position: absolute; left: 0;
+  color: var(--green); font-size: 10px; opacity: 0.65;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.chip {
+  padding: 4px 11px; border: 1px solid var(--border-green); border-radius: 50px;
+  font-size: 10px; font-family: 'Space Mono', monospace;
+  color: var(--green); letter-spacing: 0.07em;
+}
+
+/* GRAND FINALE */
+.finale-wrap {
+  position: relative; margin-top: 40px; padding-top: 60px;
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.finale-wrap.visible { opacity: 1; transform: translateY(0); }
+
+.finale-node-wrap {
+  position: absolute; left: 50%; top: -6px;
+  transform: translateX(-50%); z-index: 10;
+}
+.finale-node {
+  width: 84px; height: 84px; border-radius: 50%;
+  border: 1px solid var(--green);
+  background: linear-gradient(135deg, rgba(26,219,94,0.13), rgba(26,219,94,0.03));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace; font-size: 12px; color: var(--green);
+  box-shadow: 0 0 60px rgba(26,219,94,0.3), 0 0 120px rgba(26,219,94,0.1);
+  position: relative;
+}
+.finale-node::before {
+  content: ''; position: absolute; inset: -10px; border-radius: 50%;
+  border: 1px solid rgba(26,219,94,0.18);
+}
+.finale-node::after {
+  content: ''; position: absolute; inset: -20px; border-radius: 50%;
+  border: 1px solid rgba(26,219,94,0.07);
+}
+.finale-card {
+  background: rgba(26,219,94,0.03);
+  border: 1px solid rgba(26,219,94,0.18);
+  border-radius: 20px; padding: 80px 56px 56px;
+  text-align: center; position: relative; overflow: hidden;
+  margin-top: 50px;
+}
+.finale-card::before {
+  content: ''; position: absolute; top: -80px; left: 50%;
+  transform: translateX(-50%); width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(26,219,94,0.1), transparent 68%);
+  pointer-events: none;
+}
+.finale-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  color: var(--green); letter-spacing: 0.1em; margin-bottom: 24px;
+}
+.finale-eyebrow::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 10px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+.finale-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 0.96; margin-bottom: 20px;
+}
+.finale-title .accent { color: var(--green); }
+.finale-sub {
+  font-size: 15px; color: var(--text-muted);
+  max-width: 500px; margin: 0 auto 44px; font-weight: 300; line-height: 1.75;
+}
+.finale-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+}
+.fitem {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 22px 14px; text-align: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.fitem:hover { background: rgba(26,219,94,0.05); border-color: var(--border-green); }
+.ficon {
+  font-size: 22px; color: var(--green); margin-bottom: 10px;
+  opacity: 0.8; font-family: 'Space Mono', monospace;
+}
+.ftext { font-size: 11.5px; color: var(--text-muted); line-height: 1.55; font-weight: 300; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 36px 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.foot-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 800; color: var(--text);
+}
+.foot-logo span { color: var(--green); }
+.foot-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; color: var(--text-dim);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-align: right; line-height: 1.8;
+}
+
+/* ANIMATIONS */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+@keyframes slideDown {
+  0%{opacity:0;transform:scaleY(0);transform-origin:top}
+  45%{opacity:1;transform:scaleY(1);transform-origin:top}
+  55%{opacity:1;transform:scaleY(1);transform-origin:bottom}
+  100%{opacity:0;transform:scaleY(0);transform-origin:bottom}
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  .nav-links{display:none}
+  .hero{padding:100px 24px 60px}
+  .hero-stats{gap:24px}
+  .spine-wrap{padding:0 20px}
+  .spine-wrap::before{display:none}
+  .phase-grid{grid-template-columns:1fr}
+  .phase-node-wrap{display:none}
+  .phase-left,.phase-right,.phase.flip .phase-left,.phase.flip .phase-right{padding:0 0 0 0;text-align:left;order:unset}
+  .phase-right{padding-top:16px}
+  .finale-grid{grid-template-columns:repeat(2,1fr)}
+  .finale-card{padding:60px 24px 36px}
+  footer{flex-direction:column;gap:16px;text-align:center}
+  .foot-meta{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NEXT<span>GEN</span> 2026</div>
+  <div class="nav-links">
+    <a href="#phases">Phases</a>
+    <a href="#bootcamp">Boot Camp</a>
+    <a href="#roadshow">Roadshow</a>
+    <a href="#finale">Grand Finale</a>
+  </div>
+  <div class="nav-badge">SYS.ACTIVE: 2026</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">SYSTEM ACTIVE: NEXTGEN 2026 · PROGRAMME TIMELINE</div>
+  <h1 class="hero-title">
+    Innovation<br>
+    <span class="accent">Roadmap</span><span class="dim">.</span>
+  </h1>
+  <p class="hero-sub">From application closure to global stage — five phases of discovery, evaluation, capacity building, and international market access across Nigeria and the United Kingdom.</p>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">5</div>
+      <div class="stat-lbl">Phases</div>
+    </div>
+    <div class="sdiv"></div>
+    <div>
+      <div class="stat-num">20</div>
+      <div class="stat-lbl">Innovators</div>
+    </div>
+    <div class="sdiv"></div>
+    <div>
+      <div class="stat-num">4</div>
+      <div class="stat-lbl">UK Cities</div>
+    </div>
+    <div class="sdiv"></div>
+    <div>
+      <div class="stat-num">OCT</div>
+      <div class="stat-lbl">Grand Finale</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>DESCEND</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="tl-section" id="phases">
+  <div class="tl-header">
+    <div class="sec-label">Programme Timeline</div>
+    <h2 class="sec-title">The Logic of <span class="dim">Innovation.</span></h2>
+    <p class="sec-desc">From application closure to Grand Finale — five algorithmic phases of global innovation acceleration.</p>
+  </div>
+
+  <div class="spine-wrap">
+
+    <!-- PHASE 1 -->
+    <div class="phase" id="p1">
+      <div class="phase-node-wrap">
+        <div class="phase-node">01</div>
+      </div>
+      <div class="phase-grid">
+        <div class="phase-left">
+          <div class="phase-tag">Phase 01 · April 2026</div>
+          <h3 class="phase-name">Application<br>Closure &<br>Shortlisting</h3>
+          <div class="phase-range">APR 17 — APR 27, 2026</div>
+          <p class="phase-desc">Systematic evaluation and curation of innovation submissions. Judges convene, review frameworks align, and official engagement with partners and stakeholders commences.</p>
+        </div>
+        <div class="phase-right events">
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">APR 17, 2026</span>
+              <span class="etag">SYS.CLOSE</span>
+            </div>
+            <div class="etitle">Closure of NEXTGEN 2026 Application Portal</div>
+          </div>
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">APR 18, 2026</span>
+              <span class="etag">SYS.EVAL</span>
+            </div>
+            <div class="etitle">Judges' Inaugural Meeting</div>
+            <ul class="ebullets">
+              <li>Commencement of review process</li>
+              <li>Evaluation framework alignment</li>
+              <li>Scoring criteria finalisation</li>
+            </ul>
+          </div>
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">APR 25, 2026</span>
+              <span class="etag">SYS.PLAN</span>
+            </div>
+            <div class="etitle">Strategic Planning Meeting</div>
+            <ul class="ebullets">
+              <li>Preparation for 2-Day Boot Camp (July 8–9, Abuja)</li>
+              <li>Selection of hotel venue</li>
+              <li>Identification & engagement: FCDO, Google, Investors</li>
+            </ul>
+          </div>
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">APR 27, 2026</span>
+              <span class="etag">SYS.DISPATCH</span>
+            </div>
+            <div class="etitle">Dispatch of Official Invitation Letters</div>
+            <ul class="ebullets">
+              <li>To partner organisations and investors</li>
+              <li>Institutional stakeholder notifications</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase flip" id="p2">
+      <div class="phase-node-wrap">
+        <div class="phase-node">02</div>
+      </div>
+      <div class="phase-grid">
+        <div class="phase-left events">
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">JUN 12, 2026</span>
+              <span class="etag">SYS.ANNOUNCE</span>
+            </div>
+            <div class="etitle">Public Announcement of Shortlisted Innovators</div>
+            <ul class="ebullets">
+              <li>Publication in national dailies</li>
+              <li>NBTI DG appearance on Channels TV</li>
+              <li>Full media engagement campaign activated</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-tag">Phase 02 · June 2026</div>
+          <h3 class="phase-name">Public<br>Announcement &<br>Pre-Boot Camp</h3>
+          <div class="phase-range">JUN 12, 2026</div>
+          <p class="phase-desc">Shortlisted innovators are revealed to the nation through high-profile media channels and national press, generating public momentum ahead of Boot Camp.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase" id="p3">
+      <div class="phase-node-wrap">
+        <div class="phase-node">03</div>
+      </div>
+      <div class="phase-grid">
+        <div class="phase-left">
+          <div class="phase-tag">Phase 03 · July 2026</div>
+          <h3 class="phase-name">Boot Camp &<br>Pre-Event<br>Preparation</h3>
+          <div class="phase-range">JUL 8 — JUL 17, 2026</div>
+          <p class="phase-desc">Intensive capacity building in Abuja to sharpen innovators for the global stage. Grand Finale logistics, global invitations, and Innovate UK roadshow planning run in parallel.</p>
+        </div>
+        <div class="phase-right events" id="bootcamp">
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">JUL 8–9, 2026</span>
+              <span class="etag">SYS.BOOTCAMP</span>
+            </div>
+            <div class="etitle">NEXTGEN Boot Camp — Abuja</div>
+            <ul class="ebullets">
+              <li>Final shortlist for London determined</li>
+              <li>Capacity building sessions</li>
+              <li>Investor readiness training</li>
+              <li>Pitch development workshops</li>
+            </ul>
+          </div>
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">JUL 13, 2026</span>
+              <span class="etag">SYS.PREP</span>
+            </div>
+            <div class="etitle">Grand Finale Preparations Begin</div>
+            <ul class="ebullets">
+              <li>Invitation of global investors and key guests</li>
+              <li>Visa application processes initiated</li>
+              <li>NBTI staff travel coordination commences</li>
+            </ul>
+          </div>
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">JUL 15, 2026</span>
+              <span class="etag">SYS.LOGISTICS</span>
+            </div>
+            <div class="etitle">Hotel Reservations & Logistics Finalised</div>
+            <ul class="ebullets">
+              <li>Accommodation for NBTI team, innovators, and guests</li>
+            </ul>
+          </div>
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">JUL 17, 2026</span>
+              <span class="etag">SYS.ROADSHOW</span>
+            </div>
+            <div class="etitle">Launch of MVP Innovators Roadshow Planning</div>
+            <ul class="ebullets">
+              <li>In partnership with Innovate UK</li>
+              <li>UK market exposure engagement strategy developed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase flip" id="p4">
+      <div class="phase-node-wrap">
+        <div class="phase-node">04</div>
+      </div>
+      <div class="phase-grid">
+        <div class="phase-left events" id="roadshow">
+          <div class="ecard">
+            <div class="ecard-top">
+              <span class="edate">SEP 30, 2026</span>
+              <span class="etag">SYS.ARRIVAL</span>
+            </div>
+            <div class="etitle">20 Shortlisted Innovators Arrive in the UK</div>
+            <ul class="ebullets">
+              <li>Nationwide innovation & investment roadshows commence</li>
+            </ul>
+            <div class="chips">
+              <span class="chip">MANCHESTER</span>
+              <span class="chip">DUBLIN</span>
+              <span class="chip">WALES</span>
+              <span class="chip">LONDON</span>
+            </div>
+          </div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-tag">Phase 04 · September 2026</div>
+          <h3 class="phase-name">International<br>Roadshow &<br>Global Engagement</h3>
+          <div class="phase-range">SEP 30, 2026</div>
+          <p class="phase-desc">Twenty elite Nigerian innovators take the UK by storm — pitching, connecting, and building the global partnerships that transform breakthrough ideas into funded realities.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 5 — GRAND FINALE -->
+    <div class="finale-wrap" id="finale">
+      <div class="finale-node-wrap">
+        <div class="finale-node">05</div>
+      </div>
+      <div class="finale-card">
+        <div class="finale-eyebrow">OCTOBER 9, 2026 · LONDON, UK</div>
+        <h2 class="finale-title">NEXTGEN 2026<br><span class="accent">Grand Finale.</span></h2>
+        <p class="finale-sub">The culmination of a year's discovery, development, and ambition. Final pitch presentations, investor matchmaking, deal facilitation, and awards on the world stage.</p>
+        <div class="finale-grid">
+          <div class="fitem">
+            <div class="ficon">◈</div>
+            <div class="ftext">Final Pitch<br>Presentations</div>
+          </div>
+          <div class="fitem">
+            <div class="ficon">◉</div>
+            <div class="ftext">Investor<br>Matchmaking</div>
+          </div>
+          <div class="fitem">
+            <div class="ficon">◆</div>
+            <div class="ftext">Awards &<br>Funding Announced</div>
+          </div>
+          <div class="fitem">
+            <div class="ficon">◎</div>
+            <div class="ftext">High-Level<br>Stakeholder Engagement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /spine-wrap -->
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">NEXT<span>GEN</span> 2026</div>
+  <div class="foot-meta">
+    <div>National Board for Technology Incubation · NBTI</div>
+    <div style="opacity:0.45;margin-top:2px">Programme Timeline · Confidential · April 2026</div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.phase, .finale-wrap').forEach(el => io.observe(el));
+
+document.querySelectorAll('.ecard').forEach((el, i) => {
+  el.dataset.delay = (i % 4) * 80;
+  const parentObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), parseInt(e.target.dataset.delay) || 0);
+        parentObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  parentObs.observe(el);
+});
+</script>
+
+</body>
+</html>
